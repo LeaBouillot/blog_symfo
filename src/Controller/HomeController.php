@@ -9,18 +9,17 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home', methods: ['GET'])]
+    #[Route('/', name: 'app_home')]
     public function index(ArticleRepository $ar): Response
     {
-        $lastArticles = $ar->findBy(
+        $articles = $ar->findBy(
             [],
             ['createdAt' => 'DESC'],
             6 // On limite à 6 articles par page
         );
 
         return $this->render('home/index.html.twig', [
-            'llastArticles' => $lastArticles,
-            'totalArticles' => count($ar->findAll()) 
+            'articles' => $articles // Envoie des articles à la vue Twig
         ]);
     }
 }

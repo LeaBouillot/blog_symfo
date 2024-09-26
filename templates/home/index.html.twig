@@ -4,10 +4,11 @@
 {% endblock %}
 
 {% block body %}
+
 	<ul>
 		{% for article in articles %}
 			<li>
-				<a href="{{ path('/', { 'id': article.id }) }}">{{ article.title }}</a>
+				<a href="{{path('app_article')}}">{{ article.title }}</a>
 				<small>Publié le
 					{{ article.createdAt|date('Y-m-d') }}
 					par
@@ -36,3 +37,4 @@
 	</div>
 
 {% endblock %}
+

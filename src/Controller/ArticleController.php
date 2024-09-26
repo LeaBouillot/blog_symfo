@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ArticleController extends AbstractController
 {
-    #[Route('/article', name: 'article_list', methods: ['GET'])]
+    #[Route('/article', name: 'app_article', methods: ['GET'])]
     public function all(ArticleRepository $articles): Response
     {
         return $this->render('article/index.html.twig', [
@@ -22,13 +22,12 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/article/{id}', name:'article_show', methods: ['GET'])]
-    public function show(ArticleRepository $articles, $id): Response
+    #[Route('/article/{id}', name: 'article_show')]
+    public function show(ArticleRepository $ar, Request $request, int $id): Response
     {
-        return $this->render('article/show.html.twig', [
-            'articles' => $articles->findOneBy(
-                ['id' => $id],
-            )
+        $article = $ar->findOneBy(['id' => $id]);
+        return $this->render('article/article_show.html.twig', [
+            'article' => $article,
         ]);
     }
 }
