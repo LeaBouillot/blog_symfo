@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>{{ article.title }}</h1>
+	<p>{{ article.content }}</p>
+	<small>Publié le
+		{{ article.createdAt|date('Y-m-d') }}
+		par
+		{{ article.author }}</small>
+{% endblock %}
