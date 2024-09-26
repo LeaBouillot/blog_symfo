@@ -13,6 +13,19 @@ class ArticleController extends AbstractController
     {
         return $this->render('article/index.html.twig', [
             'controller_name' => 'ArticleController',
+            'articles' => $articles->findBy(
+                    [],
+                    ['createdAt' => 'DESC']
+                )
         ]);
     }
+    
+#Route : /article/{id}, name="article_show", methods=["GET"])
+public function show(ArticleRepository $articles, $id): Response{
+    return $this->render('article/show.html.twig', [
+        'articles' => $articles->findOneBy(
+                [id => $id],
+            )
+    ]);
+}
 }
