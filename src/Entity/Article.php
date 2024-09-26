@@ -22,10 +22,29 @@ class Article
     private ?string $content = null;
 
     #[ORM\Column]
+    private ?\DateTimeImmutable $created_at = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $updated_at = null;
+
+    #[ORM\Column]
     private ?bool $is_premium = null;
 
     #[ORM\Column(length: 80)]
     private ?string $author = null;
+
+    #[ORM\PrePersist]
+    public function setCreatedAtValue(): void
+    {
+        $this->created_at = new \DateTimeImmutable();
+        $this->setUpdatedAtValue();
+    }
+
+    #[ORM\PreUpdate]
+    public function setUpdatedAtValue(): void
+    {
+        $this->updated_at = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -56,17 +75,28 @@ class Article
         return $this;
     }
 
-    #[ORM\PrePersist]
-    public function setCreatedAtValue(): void
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
-        $this->created_at = new \DateTimeImmutable();
-        $this->setUpdatedAtValue();
+        return $this->created_at;
     }
 
-    #[ORM\PreUpdate]
-    public function setUpdatedAtValue(): void
+    public function setCreatedAt(\DateTimeImmutable $created_at): static
     {
-        $this->updated_at = new \DateTimeImmutable();
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updated_at): static
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
     }
 
     public function isPremium(): ?bool

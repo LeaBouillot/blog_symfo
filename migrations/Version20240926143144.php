@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240926124101 extends AbstractMigration
+final class Version20240926143144 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,12 +20,12 @@ final class Version20240926124101 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE article DROP created_at, DROP updated_at');
+        $this->addSql('ALTER TABLE article DROP publication_date, DROP newsletter_email');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE article ADD created_at DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', ADD updated_at DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\'');
+        $this->addSql('ALTER TABLE article ADD publication_date DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', ADD newsletter_email VARCHAR(255) DEFAULT NULL');
     }
 }

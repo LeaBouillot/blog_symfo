@@ -18,7 +18,7 @@ class AppFixtures extends Fixture
             $article->setTitle($faker->words(5, true))
                 ->setContent($faker->text(500))
                 ->setPremium($faker->boolean(30)) // 30% de chance que l'article soit premium
-                ->setAuthor($faker->username())
+                ->setAuthor($faker->username());
             ;
 
             $manager->persist($article);
